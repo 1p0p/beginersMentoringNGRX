@@ -1,0 +1,59 @@
+import { Injectable, inject } from "@angular/core";
+import { Actions, createEffect, ofType } from "@ngrx/effects";
+import { map, switchMap } from "rxjs/operators";
+import { addUserAction, changeUserAction, delUserAction, loadUserAction, successAddUserAction, successChangeUserAction, successDelUserAction, successfulLoadAction } from "../action/user-action";
+import { UserApiService } from "../service/user-api.service";
+
+@Injectable()
+export class AppEffects{
+    usersApiService = inject(UserApiService);
+    constructor(
+        private actions$: Actions
+    ){}
+
+    users$ = createEffect(()=>
+        this.actions$.pipe(
+            ofType(loadUserAction),
+            switchMap(()=> 
+                this.usersApiService.getUsers().pipe(
+                    map((val)=>successfulLoadAction({payload: val}))
+                )
+            )
+        )
+    )
+    //, {dispatch:false});
+    
+    addUser$ = createEffect(()=>
+        this.actions$.pipe(
+            ofType(addUserAction),
+            switchMap(({newUser}) => 
+                this.usersApiService.create(newUser).pipe(
+                    map((val)=>successAddUserAction({user: val})))
+            )
+        )
+    )
+    
+
+    changeUser$ = createEffect(()=>
+        this.actions$.pipe(
+            ofType(changeUserAction),
+            switchMap(({changeUser})=>
+                this.usersApiService.change(changeUser).pipe(
+                    map((val)=>successChangeUserAction({user: val}))
+                )
+            )
+        )
+    )
+
+    deleteUser$ = createEffect(()=>
+        this.actions$.pipe(
+            ofType(delUserAction),
+            switchMap(({deleteUser})=>
+                this.usersApiService.delete(deleteUser).pipe(
+                    map((val)=>successDelUserAction({user: val}))
+                )
+            )
+        )
+    )
+
+}

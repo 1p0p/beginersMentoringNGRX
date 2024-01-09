@@ -1,0 +1,17 @@
+<mat-dialog-actions>
+    <button 
+        mat-raised-button
+        class="primary"
+        (click)="openDialog()"
+    >Добавить пользователя</button>
+</mat-dialog-actions>
+
+<!--
+    Как сделать ??????
+    <app-user-card *ngFor=" users$ | ngrxPush as user" [user]="user"></app-user-card> -->
+<app-user-card 
+    (deleteUserEvent) = 'deleteUser($event)'
+    (changeUserEvent) = "changeUser($event)"
+    *ngFor="let user of users$ | async" 
+    [user]="user">
+</app-user-card>
