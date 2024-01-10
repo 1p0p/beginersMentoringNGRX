@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { CommonModule } from '@angular/common';
-import { addUserAction, changeUserAction, delUserAction, loadUserAction } from '../../state/users.actions';
+import { addUserAction, changeUserAction, deleteUserAction, loadUserAction } from '../../state/users.actions';
 import { UserCardComponent } from '../user-card/user-card.component';
 
 import {MatDialog, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
@@ -69,6 +69,6 @@ export class UserListComponent implements OnInit{
   }
 
   deleteUser(user: IUser){
-    this.store.dispatch(delUserAction({deleteUser: user}));
+    this.store.dispatch(deleteUserAction({deleteUser: user}));
   }
 }

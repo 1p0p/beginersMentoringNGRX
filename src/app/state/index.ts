@@ -3,13 +3,13 @@ import {
   ActionReducerMap,
   MetaReducer
 } from '@ngrx/store';
-import { USER_KEY, loadReducer, loadState } from './users.reducer';
+import { USER_KEY, loadReducer, LoadState } from './users.reducer';
 
 export interface State {
   /*
    стотояние нашего хранилища(State), будет иметь узел -count
    */
-   [USER_KEY]: loadState;
+   [USER_KEY]: LoadState;
 }
 
 export const reducers: ActionReducerMap<State> = {

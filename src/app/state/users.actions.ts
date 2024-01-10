@@ -7,9 +7,9 @@ export const successAddUserAction = createAction('[USER] success Add  User', pro
 export const changeUserAction = createAction('[USER] change User', props<{changeUser: IUser}>());
 export const successChangeUserAction = createAction('[USER] success change User', props<{user: IUser}>());
 
-export const delUserAction = createAction('[USER] delete User', props<{deleteUser: IUser}>());
-export const successDelUserAction = createAction('[USER] success del User', props<{user: IUser}>());
+export const deleteUserAction = createAction('[USER] delete User', props<{deleteUser: IUser}>());
+export const successDeleteUserAction = createAction('[USER] success del User', props<{user: IUser}>());
 
 export const loadUserAction = createAction('[USER] load User'); 
-export const successfulLoadAction = createAction('[USER] success download users', props<{payload: IUser[]}> ());
-export const errorLoadAction = createAction('[USER] error download users');
+export const loadUsersSuccess = createAction('[USER] success download users', props<{payload: IUser[]}> ());
+export const loadUsersFailure = createAction('[USER] failure download users');

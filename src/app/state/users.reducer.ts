@@ -1,39 +1,39 @@
 import { createReducer, on } from "@ngrx/store";
 import { IUser } from "../model/user.model";
-import { loadUserAction, successAddUserAction, successChangeUserAction, successDelUserAction, successfulLoadAction } from "./users.actions";
+import { loadUserAction, successAddUserAction, successChangeUserAction, successDeleteUserAction, loadUsersSuccess } from "./users.actions";
 
 export const USER_KEY = 'user'
 
-export interface loadState{
+export interface LoadState {
     users:IUser[];
     status: string;
 }
-export const initialState: loadState={
+export const initialState: LoadState = {
     users:[],
     status: 'waitLoad'
 };
 
 export const loadReducer = createReducer(
     initialState,
-    on(loadUserAction, (state, action)=>({
+    on(loadUserAction, (state, action) => ({
         ...state,
         status: 'loadUserAction'
     })),
-    on(successfulLoadAction, (state, { payload })=>({
+    on(loadUsersSuccess, (state, { payload }) => ({
         ...state,
         users: payload,
         status: 'successfulLoadAction'
     })),
-    on(successAddUserAction, (state, {user})=>({
+    on(successAddUserAction, (state, {user}) => ({
         ...state,
         users: [...state.users, user],
     })),
-    on(successChangeUserAction, (state, {user})=>({
+    on(successChangeUserAction, (state, {user})=> ({
         ...state,
-        users: [...state.users.map((currentUser)=>currentUser.id!==user.id ? currentUser:user)]
+        users: [...state.users.map((currentUser) => currentUser.id!==user.id ? currentUser:user)]
     })),
-    on(successDelUserAction, (state, {user})=>({
+    on(successDeleteUserAction, (state, {user}) => ({
         ...state,
-        users: [...state.users.filter((currentUser)=>currentUser.id !== user.id)]
+        users: [...state.users.filter((currentUser) => currentUser.id !== user.id)]
     })),
 );
