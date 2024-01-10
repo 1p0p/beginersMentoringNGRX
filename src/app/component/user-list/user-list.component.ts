@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { CommonModule } from '@angular/common';
-import { addUserAction, changeUserAction, countSelector, delUserAction, loadUserAction } from '../../action/user-action';
+import { addUserAction, changeUserAction, delUserAction, loadUserAction } from '../../state/users.actions';
 import { UserCardComponent } from '../user-card/user-card.component';
 
 import {MatDialog, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
@@ -13,6 +13,7 @@ import { CreateUserComponent } from '../create-user/create-user.component';
 import { IUser } from '../../model/user.model';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { countSelector } from '../../state/users.selectors';
 
 @Component({
   selector: 'app-user-list',

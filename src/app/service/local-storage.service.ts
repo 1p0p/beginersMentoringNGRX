@@ -7,7 +7,6 @@ export class LocalStorageService {
   private token: string = 'usersToken';
 
   //localStorage.getItem('usersToken');
-  //
   getItem(): string | null {
     /* если сделать так без ошибки "ERROR ReferenceError: localStorage is not defined"
     то не сохраняются данные в localStorage

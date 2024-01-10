@@ -1,7 +1,7 @@
 import { Injectable, inject } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { map, switchMap } from "rxjs/operators";
-import { addUserAction, changeUserAction, delUserAction, loadUserAction, successAddUserAction, successChangeUserAction, successDelUserAction, successfulLoadAction } from "../action/user-action";
+import { addUserAction, changeUserAction, delUserAction, loadUserAction, successAddUserAction, successChangeUserAction, successDelUserAction, successfulLoadAction } from "./users.actions";
 import { UserApiService } from "../service/user-api.service";
 
 @Injectable()

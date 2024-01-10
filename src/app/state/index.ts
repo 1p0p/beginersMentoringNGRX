@@ -1,12 +1,9 @@
 import { isDevMode } from '@angular/core';
 import {
-  ActionReducer,
   ActionReducerMap,
-  createFeatureSelector,
-  createSelector,
   MetaReducer
 } from '@ngrx/store';
-import { loadReducer, loadState, USER_KEY } from '../action/user-action';
+import { USER_KEY, loadReducer, loadState } from './users.reducer';
 
 export interface State {
   /*
