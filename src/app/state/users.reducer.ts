@@ -1,16 +1,18 @@
 import { createReducer, on } from "@ngrx/store";
 import { IUser } from "../model/user.model";
-import { loadUserAction, successAddUserAction, successChangeUserAction, successDeleteUserAction, loadUsersSuccess } from "./users.actions";
+import { loadUserAction, successAddUserAction, successChangeUserAction, successDeleteUserAction, loadUsersSuccess, setUsersFilter } from "./users.actions";
 
 export const USER_KEY = 'user'
 
 export interface LoadState {
     users:IUser[];
     status: string;
+    usersFilter: {name: string};
 }
 export const initialState: LoadState = {
     users:[],
-    status: 'waitLoad'
+    status: 'waitLoad',
+    usersFilter: {name: ''} //usersFilter: {name: string} --?
 };
 
 export const loadReducer = createReducer(
@@ -36,4 +38,8 @@ export const loadReducer = createReducer(
         ...state,
         users: [...state.users.filter((currentUser) => currentUser.id !== user.id)]
     })),
+    on(setUsersFilter, (state, {nameFilter})=>({
+        ...state,
+        usersFilter: {name: nameFilter}
+    }))
 );

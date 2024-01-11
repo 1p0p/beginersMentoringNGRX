@@ -6,6 +6,7 @@
     >Добавить пользователя</button>
 </mat-dialog-actions>
 
+<app-users-filter (filterUserEvent)="filterUsers($event)"></app-users-filter>
 <!--
     Как сделать ??????
     <app-user-card *ngFor=" users$ | ngrxPush as user" [user]="user"></app-user-card> -->

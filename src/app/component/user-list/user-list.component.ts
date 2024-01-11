@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { CommonModule } from '@angular/common';
-import { addUserAction, changeUserAction, deleteUserAction, loadUserAction } from '../../state/users.actions';
+import { addUserAction, changeUserAction, deleteUserAction, loadUserAction, setUsersFilter } from '../../state/users.actions';
 import { UserCardComponent } from '../user-card/user-card.component';
 
 import {MatDialog, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
@@ -13,7 +13,9 @@ import { CreateUserComponent } from '../create-user/create-user.component';
 import { IUser } from '../../model/user.model';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { countSelector } from '../../state/users.selectors';
+import { filteredUsers, selectAllUsers } from '../../state/users.selectors';
+import { UsersFilterComponent } from '../users-filter/users-filter.component';
+import { map, tap } from 'rxjs';
 
 @Component({
   selector: 'app-user-list',
@@ -32,10 +34,11 @@ import { countSelector } from '../../state/users.selectors';
     FormsModule,
     HttpClientModule,
     CreateUserComponent, 
+    UsersFilterComponent
   ]
 })
 export class UserListComponent implements OnInit{
-  users$ = this.store.select(countSelector);
+  users$ = this.store.select(filteredUsers);
   newUser!: IUser;
 
   fileNameDialogRef: MatDialogRef<CreateUserComponent> | undefined;
@@ -70,5 +73,10 @@ export class UserListComponent implements OnInit{
 
   deleteUser(user: IUser){
     this.store.dispatch(deleteUserAction({deleteUser: user}));
+  }
+
+  filterUsers(filter: string){
+    console.log('user-list.filterUsers(): ', filter);
+    this.store.dispatch(setUsersFilter({nameFilter: filter}));
   }
 }

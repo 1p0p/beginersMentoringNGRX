@@ -11,5 +11,7 @@ export const deleteUserAction = createAction('[USER] delete User', props<{delete
 export const successDeleteUserAction = createAction('[USER] success del User', props<{user: IUser}>());
 
 export const loadUserAction = createAction('[USER] load User'); 
-export const loadUsersSuccess = createAction('[USER] success download users', props<{payload: IUser[]}> ());
+export const loadUsersSuccess = createAction('[USER] success download users', props<{payload: IUser[]}>());
 export const loadUsersFailure = createAction('[USER] failure download users');
+
+export const setUsersFilter = createAction('[USER] set user filter', props<{nameFilter:string}>()); /// {filter: {name: string}} --?
